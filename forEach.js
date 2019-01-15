@@ -1,8 +1,11 @@
 module.exports = forEach;
-function forEach(n, f, i = []) {
+function forEach(n, f, i = [], j = i) {
 	if (n)
-		for (var j in this)
-			forEach.call(this[j], n - 1, f, [j, i]);
+		for (var k in this) {
+			j[0] = k;
+			j[1] = [];
+			forEach.call(this[k], n - 1, f, i, j[1]);
+		}
 	else
 		f(this, i);
 }
